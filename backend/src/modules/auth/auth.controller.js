@@ -3,11 +3,17 @@ const asyncHandler = require('../../common/utils/asyncHandler');
 
 exports.login = asyncHandler(async (req, res) => {
   const { badge_number, password } = req.body;
-  const sessionPayload = await authService.authenticateOfficer(badge_number, password);
-  res.status(200).json({
-    success: true,
-    data: sessionPayload
-  });
+  try {
+    const sessionPayload = await authService.authenticateOfficer(badge_number, password);
+    res.status(200).json({
+      success: true,
+      data: sessionPayload
+    });
+  } catch (error) {
+    console.error('LOGIN ERROR:', error.message);
+    console.error(error.stack);
+    throw error; // Let global error handler send the response
+  }
 });
 
 exports.refresh = asyncHandler(async (req, res) => {

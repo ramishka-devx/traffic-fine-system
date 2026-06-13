@@ -76,6 +76,12 @@ fun LoginScreen(navController: NavController, viewModel: AuthViewModel) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        if (!isOfficer) {
+            TextButton(onClick = { navController.navigate(Screen.Register.route) }) {
+                Text("Don't have an account? Register Here")
+            }
+        }
+
         TextButton(onClick = { navController.navigate(Screen.FineSearch.route) }) {
             Text("Pay Fine Without Login (Guest)")
         }

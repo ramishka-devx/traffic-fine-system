@@ -115,7 +115,7 @@ fun IssueFineScreen(navController: NavController, viewModel: FineViewModel) {
                 if (issueState is Resource.Loading) {
                     CircularProgressIndicator(modifier = Modifier.size(24.dp))
                 } else {
-                    Text("Confirm \u0026 Issue Fine")
+                    Text("Confirm & Issue Fine")
                 }
             }
 

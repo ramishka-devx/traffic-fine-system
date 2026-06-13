@@ -23,11 +23,14 @@ fun NavGraph(
         composable(Screen.Login.route) {
             LoginScreen(navController, authViewModel)
         }
+        composable(Screen.Register.route) {
+            RegisterScreen(navController, authViewModel)
+        }
         composable(Screen.Home.route) {
-            HomeScreen(navController)
+            HomeScreen(navController, authViewModel)
         }
         composable(Screen.FineSearch.route) {
-            FineSearchScreen(navController, fineViewModel)
+            FineSearchScreen(navController, fineViewModel, authViewModel)
         }
         composable(Screen.FineDetails.route) {
             FineDetailsScreen(navController, fineViewModel)

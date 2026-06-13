@@ -21,11 +21,15 @@ class AuthViewModel(
     private val _registerState = mutableStateOf<Resource<Unit>?>(null)
     val registerState: State<Resource<Unit>?> = _registerState
 
+    private val _userRole = mutableStateOf<String?>(null)
+    val userRole: State<String?> = _userRole
+
     fun officerLogin(badge: String, pin: String) {
         viewModelScope.launch {
             repository.officerLogin(badge, pin).collect { resource ->
                 _loginState.value = resource
                 if (resource is Resource.Success) {
+                    _userRole.value = "OFFICER"
                     tokenManager.saveToken(resource.data!!.accessToken)
                     tokenManager.saveUserName(resource.data.user.fullName ?: badge)
                 } else if (resource is Resource.Error) {
@@ -40,6 +44,7 @@ class AuthViewModel(
             repository.driverLogin(license, pin).collect { resource ->
                 _loginState.value = resource
                 if (resource is Resource.Success) {
+                    _userRole.value = "DRIVER"
                     tokenManager.saveToken(resource.data!!.accessToken)
                     tokenManager.saveUserName(resource.data.user.fullName ?: license)
                 }
@@ -59,6 +64,7 @@ class AuthViewModel(
         viewModelScope.launch {
             tokenManager.clearData()
             _loginState.value = null
+            _userRole.value = null
         }
     }
 }
