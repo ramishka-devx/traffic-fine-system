@@ -9,7 +9,7 @@ exports.up = async (client) => {
       updated_at    TIMESTAMPTZ   NOT NULL DEFAULT NOW()
     );
 
-    CREATE INDEX idx_stations_district_id ON stations(district_id);
+    CREATE INDEX IF NOT EXISTS idx_stations_district_id ON stations(district_id);
   `);
 };
 

@@ -55,16 +55,23 @@ exports.insertPayment = async (client, { fineId, transactionReference, amount, p
 exports.getPublicFineInfo = async (referenceNumber) => {
   const text = `
     SELECT 
-      tf.reference_number,
+      tf.reference_number AS "referenceNumber",
       tf.status,
-      fc.base_amount AS amount,
-      fc.name AS category_name,
-      tf.due_date
+      fc.base_amount AS "amountLkr",
+      fc.code AS "categoryId",
+      fc.name AS "violation",
+      o.full_name AS "officerName",
+      s.name AS "stationName",
+      tf.due_date AS "dueDate",
+      tf.created_at AS "issuedAt"
     FROM traffic_fines tf
     JOIN fine_categories fc ON tf.category_id = fc.id
+    JOIN officers o ON tf.officer_id = o.id
+    JOIN stations s ON o.station_code = s.station_code
     WHERE tf.reference_number = $1
   `;
   const result = await db.query(text, [referenceNumber]);
   return result.rows[0] || null;
 };
+
 

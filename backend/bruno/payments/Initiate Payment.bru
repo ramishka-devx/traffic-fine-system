@@ -1,0 +1,20 @@
+meta {
+  name: Initiate Payment
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/payments/initiate
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "referenceNumber": "TF-2026-000002",
+    "payerName": "John Doe",
+    "payerEmail": "johndoe@example.com",
+    "payerPhone": "+94771234567"
+  }
+}

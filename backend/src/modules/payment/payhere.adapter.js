@@ -10,4 +10,13 @@ exports.verifySignature = (params) => {
   const calculatedSignature = crypto.createHash('md5').update(derivedString).digest('hex').toUpperCase();
 
   return calculatedSignature === (md5sig ? md5sig.toUpperCase() : '');
-};
+};
+
+exports.generateCheckoutHash = (orderId, amount, currency = 'LKR') => {
+  const merchantId = env.PAYHERE_MERCHANT_ID || '1224441';
+  const secretHash = crypto.createHash('md5').update(env.PAYHERE_SECRET).digest('hex').toUpperCase();
+  const formattedAmount = parseFloat(amount).toFixed(2);
+  const derivedString = merchantId + orderId + formattedAmount + currency + secretHash;
+  return crypto.createHash('md5').update(derivedString).digest('hex').toUpperCase();
+};
+

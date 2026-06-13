@@ -34,4 +34,33 @@ const payhereWebhookValidator = [
     .isString().withMessage('MD5 signature must be a string')
 ];
 
-module.exports = { payhereWebhookValidator };
+/**
+ * Validation rules for POST /payment/initiate.
+ * Verifies the reference number is provided (either as reference_number or referenceNumber).
+ */
+const initiatePaymentValidator = [
+  body('reference_number')
+    .optional()
+    .isString().withMessage('Reference number must be a string'),
+  body('referenceNumber')
+    .optional()
+    .isString().withMessage('Reference number must be a string'),
+  body().custom((value, { req }) => {
+    if (!req.body.reference_number && !req.body.referenceNumber) {
+      throw new Error('Reference number is required (as reference_number or referenceNumber)');
+    }
+    return true;
+  }),
+  body('payerName')
+    .optional()
+    .isString().withMessage('Payer name must be a string'),
+  body('payerEmail')
+    .optional({ values: 'falsy' })
+    .isEmail().withMessage('Payer email must be a valid email address'),
+  body('payerPhone')
+    .optional()
+    .isString().withMessage('Payer phone must be a string')
+];
+
+module.exports = { payhereWebhookValidator, initiatePaymentValidator };
+

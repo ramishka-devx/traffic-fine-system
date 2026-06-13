@@ -28,11 +28,55 @@ export function usePayFine() {
     setError("");
 
     try {
-      const receipt = await submitFinePayment(paymentData);
-      setPaymentReceipt(receipt);
+      const payhereParams = await submitFinePayment(paymentData);
+      
+      if (!window.payhere) {
+        throw new Error("PayHere payment gateway is not loaded. Please try again.");
+      }
+
+      // Configure PayHere JS SDK callbacks
+      window.payhere.onCompleted = async function onCompleted(orderId) {
+        console.log("PayHere payment completed:", orderId);
+        try {
+          // Re-fetch the fine from backend to verify status update
+          const verifiedFine = await lookupFine({
+            referenceNumber: orderId
+          });
+          setFineDetails(verifiedFine);
+          setPaymentReceipt({
+            paymentId: `PAY-${Date.now()}`,
+            status: verifiedFine.status,
+            paidAt: new Date().toISOString()
+          });
+        } catch (verifyErr) {
+          // Fallback if verification fetch fails
+          setPaymentReceipt({
+            paymentId: `PAY-${Date.now()}`,
+            status: "PAID",
+            paidAt: new Date().toISOString()
+          });
+        } finally {
+          setSubmittingPayment(false);
+        }
+      };
+
+      window.payhere.onDismissed = function onDismissed() {
+        console.log("PayHere payment modal dismissed");
+        setError("Payment process was cancelled by the user.");
+        setSubmittingPayment(false);
+      };
+
+      window.payhere.onError = function onError(err) {
+        console.error("PayHere error:", err);
+        setError(err || "PayHere payment gateway error.");
+        setSubmittingPayment(false);
+      };
+
+      // Launch the payment popup
+      window.payhere.startPayment(payhereParams);
+
     } catch (err) {
       setError(err.message || "Payment failed. Please try again.");
-    } finally {
       setSubmittingPayment(false);
     }
   }

@@ -22,14 +22,36 @@ exports.handlePayHereWebhook = asyncHandler(async (req, res) => {
 // what violation, how much, when due, and the current status.
 exports.getPublicFineInfo = asyncHandler(async (req, res) => {
   const { referenceNumber } = req.params;
+  const { categoryId } = req.query;
 
   const fine = await paymentRepository.getPublicFineInfo(referenceNumber);
   if (!fine) {
     throw new NotFoundError(`No fine found with reference number ${referenceNumber}`);
   }
 
+  if (categoryId && fine.categoryId !== categoryId) {
+    throw new NotFoundError(`No fine found with reference number ${referenceNumber} and category ${categoryId}`);
+  }
+
   res.status(200).json({
     success: true,
     data: fine
+  });
+});
+
+exports.initiatePayment = asyncHandler(async (req, res) => {
+  const referenceNumber = req.body.reference_number || req.body.referenceNumber;
+  const { payerName, payerEmail, payerPhone } = req.body;
+
+  const paymentParams = await paymentService.initiatePayHerePayment({
+    referenceNumber,
+    payerName,
+    payerEmail,
+    payerPhone
+  });
+
+  res.status(200).json({
+    success: true,
+    data: paymentParams
   });
 });
