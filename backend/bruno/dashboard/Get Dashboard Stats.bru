@@ -1,0 +1,21 @@
+meta {
+  name: Get Dashboard Stats
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/admin/dashboard
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJBRE1JTiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxNTU4LCJleHAiOjE3ODEyNDUxNTh9.W42yI2lznOsqcwn018QmmK4yQ0uuhgCrsR6pU2Oqr10
+}
+
+body:json {
+  {
+    "refresh_token": "7fcb7557ac270e1c5241bac001101eb53c55e8c27a0dc79196afe85447d50e94e21ad7ddb79f944029ca4d7bd57ac573744fbe21473b5473043f60d2bdeac367"
+  }
+}

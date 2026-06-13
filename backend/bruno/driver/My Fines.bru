@@ -1,0 +1,15 @@
+meta {
+  name: My Fines
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/driver/fines
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJEUklWRVIiLCJpYXQiOjE3ODEyNDI3ODEsImV4cCI6MTc4MTI0NjM4MX0.PnRgpkkaJSZSaz0SJ71GVBLDG_6Yc_SWkx-NrKeQ7NM
+}

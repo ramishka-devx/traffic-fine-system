@@ -1,0 +1,51 @@
+meta {
+  name: Process Webhook
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/payments/webhook
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "merchant_id": "123456",
+    "order_id": "TF-2026-000002",
+    "payment_id": "PAY-123999444",
+    "payhere_amount": "3000.00",
+    "payhere_currency": "LKR",
+    "status_code": "2",
+    "md5sig": ""
+  }
+}
+
+script:pre-request {
+  const CryptoJS = require("crypto-js");
+  
+  // Get the request body
+  let body = req.getBody();
+  
+  // Local environment uses an empty PAYHERE_SECRET by default
+  const secret = ""; 
+  
+  // 1. Hash the secret
+  const secretHash = CryptoJS.MD5(secret).toString().toUpperCase();
+  
+  // 2. Concatenate values
+  const derivedString = 
+    body.merchant_id + 
+    body.order_id + 
+    body.payhere_amount + 
+    body.payhere_currency + 
+    body.status_code + 
+    secretHash;
+    
+  // 3. Hash the final string and assign to md5sig
+  body.md5sig = CryptoJS.MD5(derivedString).toString().toUpperCase();
+  
+  // Update the request body
+  req.setBody(body);
+}

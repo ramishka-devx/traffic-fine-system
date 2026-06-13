@@ -1,0 +1,20 @@
+meta {
+  name: Verify Status
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/fines/status/verify?vehicleNumber=CBA-9876
+  body: none
+  auth: bearer
+}
+
+params:query {
+  vehicleNumber: CBA-9876
+  ~referenceNumber: TF-2026-000002
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJBRE1JTiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxNTU4LCJleHAiOjE3ODEyNDUxNTh9.W42yI2lznOsqcwn018QmmK4yQ0uuhgCrsR6pU2Oqr10
+}
