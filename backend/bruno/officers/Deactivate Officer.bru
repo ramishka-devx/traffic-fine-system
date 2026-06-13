@@ -1,0 +1,15 @@
+meta {
+  name: Deactivate Officer
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/api/officers/8
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJBRE1JTiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxNTU4LCJleHAiOjE3ODEyNDUxNTh9.W42yI2lznOsqcwn018QmmK4yQ0uuhgCrsR6pU2Oqr10
+}

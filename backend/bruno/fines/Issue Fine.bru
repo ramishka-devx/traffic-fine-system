@@ -1,0 +1,24 @@
+meta {
+  name: Issue Fine
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/fines
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJBRE1JTiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxNTU4LCJleHAiOjE3ODEyNDUxNTh9.W42yI2lznOsqcwn018QmmK4yQ0uuhgCrsR6pU2Oqr10
+}
+
+body:json {
+  {
+    "vehicleNumber": "CBA-9876",
+    "driverLicenseNumber": "B12345678",
+    "categoryId": 3,
+    "notes": "Ignore traffic lights"
+  }
+}

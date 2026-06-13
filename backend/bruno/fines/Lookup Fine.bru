@@ -1,0 +1,19 @@
+meta {
+  name: Lookup Fine By Reference
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/fines/TF-2026-000002?categoryCode=SPD-01
+  body: none
+  auth: bearer
+}
+
+params:query {
+  categoryCode: SPD-01
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJBRE1JTiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxNTU4LCJleHAiOjE3ODEyNDUxNTh9.W42yI2lznOsqcwn018QmmK4yQ0uuhgCrsR6pU2Oqr10
+}

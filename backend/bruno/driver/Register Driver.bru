@@ -1,0 +1,19 @@
+meta {
+  name: Register Driver
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/driver/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "driver_license_number": "B12345678",
+    "mobile_number": "+94771234567",
+    "password": "111111"
+  }
+}

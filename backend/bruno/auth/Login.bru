@@ -1,0 +1,25 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "badge_number": "ADMIN-001",
+    "password": "111111"
+  }
+}
+
+script:post-response {
+  // Automatically extract the token from the response and save it as an environment variable
+  if(res.body.success && res.body.data && res.body.data.accessToken) {
+    bru.setEnvVar("token", res.body.data.accessToken);
+  }
+}

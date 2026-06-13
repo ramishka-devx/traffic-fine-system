@@ -1,0 +1,21 @@
+meta {
+  name: Get All Categories
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/categories
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInJvbGUiOiJTRU5JT1JfT0ZGSUNFUiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxMTg1LCJleHAiOjE3ODEyNDQ3ODV9.fKFlSx1d8I9_mqxnePuGIENvNFqnctCZl1AZH2H-g40
+}
+
+body:json {
+  {
+    "refresh_token": "ad9e9f054124be23a7d9d497592891c94e7e815b1a44f235260c8185a5e1c61c83443241d65758adb8a1d0b8bf6c5c1bd3fad83b875b9013db84b1318967a112"
+  }
+}

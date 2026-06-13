@@ -1,0 +1,26 @@
+meta {
+  name: Create Officer
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/officers
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInJvbGUiOiJTRU5JT1JfT0ZGSUNFUiIsInN0YXRpb25Db2RlIjoiQ01CLTAxIiwiaWF0IjoxNzgxMjQxMTg1LCJleHAiOjE3ODEyNDQ3ODV9.fKFlSx1d8I9_mqxnePuGIENvNFqnctCZl1AZH2H-g40
+}
+
+body:json {
+  {
+    "badge_number": "38163",
+    "full_name": "Nimal",
+    "phone_number": "+94765688454",
+    "password": "111111",
+    "role": "OFFICER",
+    "station_code": "MTR-01"
+  }
+}
