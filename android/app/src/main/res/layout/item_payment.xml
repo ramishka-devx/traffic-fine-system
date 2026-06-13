@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/card_background"
+    android:padding="@dimen/padding_medium"
+    android:layout_marginBottom="@dimen/spacing_8">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/paymentIdText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Payment #12345"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginBottom="@dimen/spacing_4" />
+
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jan 15, 2024"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="@dimen/spacing_4" />
+
+        <TextView
+            android:id="@+id/finesCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 fine(s)"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/amountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs. 2,500.00"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/primary"
+            android:layout_marginBottom="@dimen/spacing_8" />
+
+        <TextView
+            android:id="@+id/statusBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:paddingLeft="@dimen/spacing_8"
+            android:paddingRight="@dimen/spacing_8"
+            android:paddingTop="@dimen/spacing_4"
+            android:paddingBottom="@dimen/spacing_4"
+            android:background="@drawable/badge_background" />
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed"
+            android:textSize="10sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium"
+    android:background="@color/background">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Amount Summary Card -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/card_background"
+        android:padding="@dimen/padding_medium"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Amount Due"
+            style="@style/TextStyle.BodySmall" />
+
+        <TextView
+            android:id="@+id/totalDueText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs. 0.00"
+            style="@style/TextStyle.HeadingSmall"
+            android:textColor="@color/danger"
+            android:layout_marginBottom="@dimen/spacing_8" />
+
+        <TextView
+            android:id="@+id/unpaidCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 unpaid fines"
+            style="@style/TextStyle.BodySmall"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
+
+    <!-- Pay All Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/payAllButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="Pay All"
+        android:layout_marginBottom="@dimen/spacing_16"
+        style="@style/ButtonStyle.Primary"
+        android:visibility="gone" />
+
+    <!-- No Payments Text -->
+    <TextView
+        android:id="@+id/noPaymentsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No pending payments"
+        style="@style/TextStyle.BodyLarge"
+        android:textColor="@color/text_secondary"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing_16"
+        android:visibility="gone" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:spacing="@dimen/spacing_8"
+        android:layout_marginBottom="@dimen/spacing_16">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/paymentHistoryButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:text="Payment History"
+            style="@style/ButtonStyle.Secondary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/paymentMethodsButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:text="Payment Methods"
+            style="@style/ButtonStyle.Secondary" />
+    </LinearLayout>
+</LinearLayout>

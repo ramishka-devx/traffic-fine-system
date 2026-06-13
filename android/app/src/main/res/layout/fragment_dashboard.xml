@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!-- Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
+
+            <!-- Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome Back!"
+                style="@style/TextStyle.HeadingMedium"
+                android:layout_marginBottom="@dimen/spacing_8" />
+
+            <!-- Statistics Cards -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:spacing="@dimen/spacing_12">
+
+                <!-- Total Fines Card -->
+                <LinearLayout
+                    android:id="@+id/totalFinesCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_marginBottom="@dimen/spacing_16">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Fines"
+                        style="@style/TextStyle.BodySmall" />
+
+                    <TextView
+                        android:id="@+id/totalFinesCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        style="@style/TextStyle.HeadingSmall"
+                        android:textColor="@color/primary"
+                        android:layout_marginTop="@dimen/spacing_8" />
+                </LinearLayout>
+
+                <!-- Unpaid Fines Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_marginBottom="@dimen/spacing_16">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unpaid"
+                        style="@style/TextStyle.BodySmall" />
+
+                    <TextView
+                        android:id="@+id/unpaidFinesCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        style="@style/TextStyle.HeadingSmall"
+                        android:textColor="@color/warning"
+                        android:layout_marginTop="@dimen/spacing_8" />
+                </LinearLayout>
+
+                <!-- Paid Fines Card -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_marginBottom="@dimen/spacing_16">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Paid"
+                        style="@style/TextStyle.BodySmall" />
+
+                    <TextView
+                        android:id="@+id/paidFinesCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        style="@style/TextStyle.HeadingSmall"
+                        android:textColor="@color/success"
+                        android:layout_marginTop="@dimen/spacing_8" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Amount Due Section -->
+            <LinearLayout
+                android:id="@+id/payNowSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="@dimen/padding_medium"
+                android:layout_marginBottom="@dimen/spacing_16"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount Due"
+                    style="@style/TextStyle.BodyMedium" />
+
+                <TextView
+                    android:id="@+id/amountDueCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs. 0.00"
+                    style="@style/TextStyle.HeadingSmall"
+                    android:textColor="@color/danger"
+                    android:layout_marginTop="@dimen/spacing_8"
+                    android:layout_marginBottom="@dimen/spacing_16" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/payNowButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="Pay Now"
+                    style="@style/ButtonStyle.Primary" />
+            </LinearLayout>
+
+            <!-- Quick Actions -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quick Actions"
+                style="@style/TextStyle.HeadingSmall"
+                android:layout_marginBottom="@dimen/spacing_12" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:spacing="@dimen/spacing_12"
+                android:layout_marginBottom="@dimen/spacing_16">
+
+                <!-- View Fines Button -->
+                <LinearLayout
+                    android:id="@+id/viewFinesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📋"
+                        android:textSize="32sp"
+                        android:layout_marginBottom="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Fines"
+                        style="@style/TextStyle.BodySmall"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Search Fines Button -->
+                <LinearLayout
+                    android:id="@+id/searchFinesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔍"
+                        android:textSize="32sp"
+                        android:layout_marginBottom="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Search"
+                        style="@style/TextStyle.BodySmall"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Payment History Button -->
+                <LinearLayout
+                    android:id="@+id/paymentHistoryButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="💳"
+                        android:textSize="32sp"
+                        android:layout_marginBottom="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payments"
+                        style="@style/TextStyle.BodySmall"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Profile Button -->
+                <LinearLayout
+                    android:id="@+id/profileButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/card_background"
+                    android:padding="@dimen/padding_medium"
+                    android:layout_columnWeight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="👤"
+                        android:textSize="32sp"
+                        android:layout_marginBottom="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profile"
+                        style="@style/TextStyle.BodySmall"
+                        android:gravity="center" />
+                </LinearLayout>
+            </GridLayout>
+
+            <!-- Info Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/primary_light"
+                android:padding="@dimen/padding_medium"
+                android:layout_marginBottom="@dimen/spacing_16">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ Important"
+                    style="@style/TextStyle.BodyMedium"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Late payment penalties may apply. Please pay your outstanding fines on time."
+                    style="@style/TextStyle.BodySmall"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/spacing_8" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Refresh -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
