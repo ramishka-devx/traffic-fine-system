@@ -1,10 +1,11 @@
+import { RecentActivityTable } from "../components/RecentActivityTable";
 import { CategoryBreakdown } from "../components/CategoryBreakdown";
 import { DistrictTable } from "../components/DistrictTable";
 import { StatCard } from "../components/StatCard";
 import { useDashboard } from "../hooks/useDashboard";
 
-export function DashboardPage() {
-  const { loading, error, dashboard, reload } = useDashboard();
+export function DashboardPage({ session, onLogout }) {
+  const { loading, error, dashboard, reload } = useDashboard(session?.accessToken);
 
   return (
     <main className="min-h-screen px-4 py-10 md:px-8">
@@ -15,6 +16,18 @@ export function DashboardPage() {
           <p className="mt-2 text-sm text-amber-100">
             Central overview for district-wise revenue and category-level monitoring.
           </p>
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm text-amber-100">
+            <span className="rounded-full border border-amber-300/30 px-3 py-1">
+              Signed in as {session?.user?.name || "Officer"} ({session?.user?.role || "UNKNOWN"})
+            </span>
+            <button
+              type="button"
+              onClick={onLogout}
+              className="rounded-full border border-amber-200 px-3 py-1 font-semibold text-white transition hover:bg-white/10"
+            >
+              Logout
+            </button>
+          </div>
         </header>
 
         {error ? (
@@ -37,17 +50,17 @@ export function DashboardPage() {
           <>
             <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <StatCard
-                label="Total Collection"
-                value={`LKR ${dashboard.totals.totalCollectionsLkr.toLocaleString()}`}
+                label="Total Issued"
+                value={dashboard.summary.total_issued.toLocaleString()}
               />
-              <StatCard label="Total Paid Fines" value={dashboard.totals.totalPaidFines.toLocaleString()} />
-              <StatCard label="Paid Today" value={dashboard.totals.paidToday.toLocaleString()} />
-              <StatCard label="Pending Fines" value={dashboard.totals.pendingFines.toLocaleString()} />
+              <StatCard label="Total Unpaid" value={dashboard.summary.total_unpaid.toLocaleString()} />
+              <StatCard label="Total Paid" value={dashboard.summary.total_paid.toLocaleString()} />
+              <StatCard label="Revenue Collected" value={`LKR ${Number(dashboard.summary.revenue_collected).toLocaleString()}`} />
             </section>
 
             <section className="grid gap-6 lg:grid-cols-[2fr,1fr]">
-              <DistrictTable rows={dashboard.districtCollections} />
-              <CategoryBreakdown rows={dashboard.categoryBreakdown} />
+              <DistrictTable rows={dashboard.district_breakdown} />
+              <RecentActivityTable rows={dashboard.recent_activity} />
             </section>
           </>
         ) : null}

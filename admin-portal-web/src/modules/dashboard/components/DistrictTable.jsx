@@ -15,10 +15,10 @@ export function DistrictTable({ rows = [] }) {
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.district} className="border-t border-amber-100">
-                <td className="px-5 py-3 font-semibold text-brass-900">{row.district}</td>
-                <td className="px-5 py-3 text-slate-700">{row.paidFines}</td>
-                <td className="px-5 py-3 text-slate-700">{row.collectionLkr.toLocaleString()}</td>
+              <tr key={row.district_name} className="border-t border-amber-100">
+                <td className="px-5 py-3 font-semibold text-brass-900">{row.district_name}</td>
+                <td className="px-5 py-3 text-slate-700">{row.total_fines}</td>
+                <td className="px-5 py-3 text-slate-700">LKR {Number(row.revenue).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

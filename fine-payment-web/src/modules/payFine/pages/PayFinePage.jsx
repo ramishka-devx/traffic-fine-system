@@ -1,18 +1,14 @@
 import { FineLookupForm } from "../components/FineLookupForm";
 import { FineDetailsCard } from "../components/FineDetailsCard";
-import { PaymentForm } from "../components/PaymentForm";
 import { PaymentReceipt } from "../components/PaymentReceipt";
 import { usePayFine } from "../hooks/usePayFine";
 
 export function PayFinePage() {
   const {
     loadingFine,
-    submittingPayment,
     fineDetails,
-    paymentReceipt,
     error,
     searchFine,
-    payFine,
     reset
   } = usePayFine();
 
@@ -36,11 +32,7 @@ export function PayFinePage() {
           <FineDetailsCard fineDetails={fineDetails} />
         </div>
 
-        {fineDetails && !paymentReceipt ? (
-          <PaymentForm fineDetails={fineDetails} submitting={submittingPayment} onSubmit={payFine} />
-        ) : null}
-
-        <PaymentReceipt receipt={paymentReceipt} onReset={reset} />
+        <PaymentReceipt fineDetails={fineDetails} onReset={reset} />
       </div>
     </main>
   );
