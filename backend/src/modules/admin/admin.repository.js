@@ -38,7 +38,7 @@ exports.getFinesByDistrict = async () => {
 exports.getRecentFines = async () => {
   const queryText = `
     SELECT 
-      tf.id, tf.vehicle_number, tf.status, fc.base_amount, tf.created_at,
+      tf.id, tf.reference_number, tf.vehicle_number, tf.status, fc.base_amount, tf.created_at,
       fc.name as violation,
       o.full_name as officer_name
     FROM traffic_fines tf
