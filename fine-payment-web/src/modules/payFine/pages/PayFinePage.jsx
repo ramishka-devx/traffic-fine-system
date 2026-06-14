@@ -32,11 +32,16 @@ export function PayFinePage() {
         ) : null}
 
         <div className="grid gap-6 md:grid-cols-2">
-          <FineLookupForm onSubmit={searchFine} loading={loadingFine} />
+          <FineLookupForm key={fineDetails ? fineDetails.referenceNumber : "empty"} onSubmit={searchFine} loading={loadingFine} />
           <FineDetailsCard fineDetails={fineDetails} />
         </div>
 
-        {fineDetails && !paymentReceipt ? (
+        {fineDetails && fineDetails.status === 'PAID' ? (
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-8 text-center text-emerald-800 shadow-panel">
+            <h3 className="font-display text-2xl font-bold">Your Fine is Already Paid</h3>
+            <p className="mt-2">Thank you. This fine reference number has already been settled.</p>
+          </div>
+        ) : fineDetails && !paymentReceipt ? (
           <PaymentForm fineDetails={fineDetails} submitting={submittingPayment} onSubmit={payFine} />
         ) : null}
 

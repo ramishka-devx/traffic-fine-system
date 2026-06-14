@@ -1,11 +1,18 @@
 import { useState } from "react";
 
 export function FineLookupForm({ onSubmit, loading }) {
-  const [referenceNumber, setReferenceNumber] = useState("");
+  const [form, setForm] = useState({
+    referenceNumber: ""
+  });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    onSubmit({ referenceNumber });
+    onSubmit({ referenceNumber: form.referenceNumber });
   }
 
   return (
@@ -22,8 +29,8 @@ export function FineLookupForm({ onSubmit, loading }) {
         <input
           id="referenceNumber"
           name="referenceNumber"
-          value={referenceNumber}
-          onChange={(e) => setReferenceNumber(e.target.value)}
+          value={form.referenceNumber}
+          onChange={handleChange}
           required
           className="w-full rounded-xl border border-sky-100 px-4 py-3 text-sm outline-none transition focus:border-brand-500"
           placeholder="TF-2026-001245"

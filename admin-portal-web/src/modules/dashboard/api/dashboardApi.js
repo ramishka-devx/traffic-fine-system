@@ -1,33 +1,34 @@
 import { httpClient } from "../../../shared/api/httpClient";
 
-const mockDashboard = {
-  totals: {
-    totalCollectionsLkr: 12750000,
-    totalPaidFines: 3450,
-    paidToday: 126,
-    pendingFines: 540
-  },
-  districtCollections: [
-    { district: "Colombo", collectionLkr: 3800000, paidFines: 920 },
-    { district: "Gampaha", collectionLkr: 2150000, paidFines: 612 },
-    { district: "Kandy", collectionLkr: 1850000, paidFines: 501 },
-    { district: "Galle", collectionLkr: 1200000, paidFines: 380 },
-    { district: "Kurunegala", collectionLkr: 950000, paidFines: 312 }
-  ],
-  categoryBreakdown: [
-    { categoryId: "SPD-01", categoryName: "Speeding", collectionLkr: 4200000 },
-    { categoryId: "PKG-02", categoryName: "Illegal Parking", collectionLkr: 2650000 },
-    { categoryId: "DOC-03", categoryName: "Document Offense", collectionLkr: 1800000 },
-    { categoryId: "SIG-04", categoryName: "Signal Violation", collectionLkr: 1600000 }
-  ]
-};
-
 export async function getDashboardOverview() {
-  try {
-    // TODO: Replace with real endpoint once backend admin module is ready.
-    // Suggested endpoint: GET /admin/dashboard/overview
-    return await httpClient("/admin/dashboard/overview");
-  } catch (error) {
-    return mockDashboard;
+  const res = await httpClient("/admin/dashboard");
+  return res.data;
+}
+
+export async function searchFines(query) {
+  if (!query) return [];
+  const isReference = query.toUpperCase().startsWith("TF-");
+  const params = new URLSearchParams();
+  
+  if (isReference) {
+    params.append("referenceNumber", query.toUpperCase());
+  } else {
+    params.append("vehicleNumber", query.toUpperCase());
   }
+
+  const res = await httpClient(`/fines/status/verify?${params.toString()}`);
+  
+  // API returns an array, map it to match RecentActivity format
+  const fines = Array.isArray(res.data) ? res.data : [res.data];
+  
+  return {
+    ...res,
+    data: fines.map(fine => ({
+      id: fine.reference_number,
+      reference_number: fine.reference_number,
+      violation: fine.category_name,
+      base_amount: fine.amount,
+      status: fine.status
+    }))
+  };
 }
